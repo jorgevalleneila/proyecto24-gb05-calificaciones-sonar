@@ -11,8 +11,7 @@ def main():
     app.add_api('openapi.yaml',
                 arguments={'title': 'Cineverse Calificaciones API'},
                 pythonic_params=True)
-
-    app.run(port=8080)
+    app.run(port=8080, debug=True)
 
 
 if __name__ == '__main__':

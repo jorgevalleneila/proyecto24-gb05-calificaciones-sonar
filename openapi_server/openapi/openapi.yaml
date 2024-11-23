@@ -12,11 +12,11 @@ paths:
       description: Permite a los usuarios calificar un contenido y añadir comentarios.
       operationId: calificar_contenido
       requestBody:
+        required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Calificacion'
-        required: true
       responses:
         "201":
           description: Calificación registrada correctamente
@@ -24,7 +24,7 @@ paths:
           description: Datos inválidos
       summary: Calificar contenido
       x-openapi-router-controller: openapi_server.controllers.default_controller
-  /calificaciones/{id}:
+  /calificaciones/{id_contenido}:
     get:
       description: Muestra las calificaciones y comentarios promedio para un contenido
         específico.
@@ -32,7 +32,7 @@ paths:
       parameters:
       - explode: false
         in: path
-        name: id
+        name: id_contenido
         required: true
         schema:
           type: integer
