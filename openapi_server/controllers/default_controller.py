@@ -1,3 +1,8 @@
+import connexion
+from flask import jsonify
+from openapi_server.database_logica import SessionLocal
+from openapi_server import CRUD_calificaciones
+
 def calificar_contenido():
     """Calificar contenido"""
     if not connexion.request.is_json:
@@ -20,6 +25,20 @@ def calificar_contenido():
             db, id_contenido, id_usuario, puntuacion, comentario
         )
         return jsonify(nueva_calificacion), 201
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    finally:
+        db.close()
+
+def calificaciones_id_get(id_contenido):
+    """Obtener calificaciones de un contenido"""
+    db = SessionLocal()
+    try:
+        calificaciones = CRUD_calificaciones.obtener_calificaciones_por_contenido(db, id_contenido)
+        if calificaciones:
+            return jsonify(calificaciones)
+        else:
+            return jsonify({'mensaje': 'No hay calificaciones para este contenido'}), 404
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     finally:
