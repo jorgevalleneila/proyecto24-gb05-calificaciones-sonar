@@ -65,4 +65,4 @@ class Model:
 
     def __ne__(self, other):
         """Returns true if both objects are not equal"""
-        return not self == other
+        return self != other
